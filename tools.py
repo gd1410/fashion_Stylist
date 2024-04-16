@@ -4,6 +4,7 @@ from PIL import Image
 
 from langchain_community.utilities import SearchApiAPIWrapper
 from langchain_community.utilities import SerpAPIWrapper
+from langchain_community.utilities.dalle_image_generator import DallEAPIWrapper
 from langchain.agents import AgentType, Tool, initialize_agent
 
 from langchain.pydantic_v1 import BaseModel, Field
@@ -46,5 +47,20 @@ def GoogleShoppingTool(query:str):
 # Google Search Tool
 @tool
 def google_search(query: str):
-    """Performs a Google search using the provided query string. Choose this tool when you need to find weather data or data about the place such as its current fashion trend"""
+    """Performs a Google search using the provided query string.
+    Choose this tool when you need to find weather data or data about the place such as its current fashion trend
+    When asked about weather data use www.accuweather.com to get the temperature data """
     return SerpAPIWrapper().run(query)
+
+
+
+
+# Generate your own image - tool
+@tool
+def fashion_image_generator(query: str):
+    """Call this when the user wants to generate his custom fashion image"""
+    res = DallEAPIWrapper(model="dall-e-3").run(f"You generate a single image of specific clothes with the mentioned color combination, text and pattern as requested. Strictly Do not generate any obscene or vulgar image or text. Strictly Do not generate any discriminative image.")
+
+    answer_to_agent = (f"Use this format- Here is your custom fashion generated - did you like it?"
+                       f"url= {res}")
+    return answer_to_agent

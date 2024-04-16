@@ -14,7 +14,7 @@ def display_header_and_image():
     Displays the header information for the chatbot and an image.
     """
 
-    st.markdown('# AI Fashion Stylist')
+    st.markdown('# STYLO - AI Fashion Stylist')
     st.markdown('Powered by Langchain Agents, OpenAI Function Calling, and Streamlit')
     # image = Image.open('images/ref.png')
     # width, height = image.size
@@ -27,7 +27,7 @@ def initialize_session():
     Initializes or resets session variables.
     """
     if 'responses' not in st.session_state:
-        st.session_state['responses'] = [{'text': 'How can I assist you?', 'image_url': None}]
+        st.session_state['responses'] = [{'text': 'Hello !! What style are you looking for today?', 'image_url': None}]
     if 'requests' not in st.session_state:
         st.session_state['requests'] = []
 
@@ -60,9 +60,9 @@ def main():
     prompt_container = st.container()
 
     with prompt_container:
-        query = st.text_input('Prompt: ', placeholder='Enter your prompt here..')
+        query = st.text_input('Message: ', placeholder='Enter your query here..')
         if query:
-            with st.spinner('Generating Response...'):
+            with st.spinner('Fetching required info...'):
                 result = st.session_state.agent({'input': query})
                 st.session_state.requests.append(query)
 

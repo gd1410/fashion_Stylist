@@ -8,16 +8,16 @@ from langchain_core.utils.function_calling import convert_to_openai_function
 from langchain_openai.chat_models import ChatOpenAI
 
 from tools import GoogleShoppingTool
-from tools import google_search
+from tools import google_search, fashion_image_generator
 
 def create_agent():
 
-    tools = [GoogleShoppingTool, google_search]
+    tools = [GoogleShoppingTool, google_search, fashion_image_generator]
 
     functions = [convert_to_openai_function(f) for f in tools]
     model = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0).bind(functions=functions)
 
-    prompt = ChatPromptTemplate.from_messages([("system", "You are fashion stylist assistant and will keep the conversation strictly related to fashion.If asked about weather you can search for weather data and suggest suitable clothes."),
+    prompt = ChatPromptTemplate.from_messages([("system", "You are fashion stylist assistant named STYLO and you will keep the conversation strictly related to fashion.If asked about weather you can search for weather data and suggest suitable clothes."),
                                                MessagesPlaceholder(variable_name="chat_history"), ("user", "{input}"),
                                                MessagesPlaceholder(variable_name="agent_scratchpad")])
 
