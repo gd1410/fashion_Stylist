@@ -59,7 +59,7 @@ def google_search(query: str):
 @tool
 def fashion_image_generator(query: str):
     """Call this when the user wants to generate his custom fashion image"""
-    res = DallEAPIWrapper(model="dall-e-3").run(f"You generate a single image of specific clothes with the mentioned color combination, text and pattern as requested. Strictly Do not generate any obscene or vulgar image or text. Strictly Do not generate any discriminative image.")
+    res = DallEAPIWrapper(model="dall-e-3").run(f"You generate an image of {query}. Strictly Do not generate any obscene or vulgar image or text.")
 
     answer_to_agent = (f"Use this format- Here is your custom fashion generated - did you like it?"
                        f"url= {res}")

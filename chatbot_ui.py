@@ -27,7 +27,7 @@ def initialize_session():
     Initializes or resets session variables.
     """
     if 'responses' not in st.session_state:
-        st.session_state['responses'] = [{'text': 'Hello !! What style are you looking for today?', 'image_url': None}]
+        st.session_state['responses'] = [{'text': 'Hello!  What style are you looking for today?', 'image_url': None}]
     if 'requests' not in st.session_state:
         st.session_state['requests'] = []
 
