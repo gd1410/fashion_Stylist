@@ -1,1 +1,8 @@
+pandas
+pyodbc
+confluent-kafka
+sentence-transformers
 python-dotenv
+langchain
+langchain_openai
+agents
