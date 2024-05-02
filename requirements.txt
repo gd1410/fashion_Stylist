@@ -1,1 +1,1 @@
-install python-dotenv
+python-dotenv
